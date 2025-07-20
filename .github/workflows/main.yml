@@ -57,10 +57,10 @@ options.add_argument('--no-sandbox')
 try:
     browser = webdriver.Edge(DriverManager().install(), options=options)
     browser.get('https://example.com')
-    print('✅ Selenium está funcionando. Título da página:', browser.title)
+    print('Selenium está funcionando. Título da página:', browser.title)
     browser.quit()
 except Exception as e:
-    print('❌ Falha ao iniciar o navegador:', e)
+    print('Falha ao iniciar o navegador:', e)
     sys.exit(1)
 "
     - name: Rodar script com Selenium em modo headless
