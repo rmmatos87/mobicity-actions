@@ -1,0 +1,46 @@
+name: Mobicity Automation
+
+on:
+  workflow_dispatch:
+    inputs:
+      json_usr:
+        description: 'Cole aqui o conteúdo completo do JSON de usuario'
+        required: true
+        default: ''
+      shift:
+        description: 'Turno de n dias (nD / nN / 3D+3N)'
+        required: true
+        default: '3D+3N'
+      start_day:
+        description: 'Data de início da escala (DD/MM/AAAA)'
+        required: true
+        default: ''
+      pwd:
+        description: 'Senha do Mobicity'
+        required: true
+        default: ''
+
+jobs:
+  run-mobicity:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v3
+
+    - name: Instalar dependências
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y chromium-browser xvfb
+        pip install selenium==3.14.0 webdriver-manager==4.0.1
+
+    - name: Criar arquivo JSON com base no input
+      run: |
+        echo '${{ github.event.inputs.json_usr }}' > usr.json
+
+    - name: Rodar script com Selenium em modo headless
+      env:
+        DISPLAY: :99
+      run: |
+        Xvfb :99 &
+        python3 mobicity/run_mobicity.py --json_sitemap=mobicity/mobicity_site_map.json --json_usr=mobicity/usr.json --shift=${{ github.event.inputs.shift }} --start_day=${{ github.event.inputs.start_day }} --pwd=${{ github.event.inputs.pwd }}
