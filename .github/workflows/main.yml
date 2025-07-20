@@ -43,4 +43,4 @@ jobs:
         DISPLAY: :99
       run: |
         Xvfb :99 &
-        python3 mobicity/run_mobicity.py --json_sitemap=mobicity/mobicity_site_map.json --json_usr=mobicity/usr.json --shift=${{ github.event.inputs.shift }} --start_day=${{ github.event.inputs.start_day }} --pwd=${{ github.event.inputs.pwd }}
+        python3 mobicity/run_mobicity.py --json_sitemap=mobicity/mobicity_site_map.json --json_usr=usr.json --shift=${{ github.event.inputs.shift }} --start_day=${{ github.event.inputs.start_day }} --pwd=${{ github.event.inputs.pwd }}
