@@ -42,7 +42,7 @@ schedule_n = user_config['week_schedule']['night']
 
 # Create Mobicity instance and configure
 m_d = Mobicity(
-    shift=shift,
+    shift='day',
     time_to_work=time_to_work_d,
     time_to_home=time_to_home_d,
     start_day=start_day,
@@ -51,7 +51,7 @@ m_d = Mobicity(
     **addresses
 )
 m_n = Mobicity(
-    shift=shift,
+    shift='night',
     time_to_work=time_to_work_n,
     time_to_home=time_to_home_n,
     start_day=start_day,
